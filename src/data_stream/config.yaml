@@ -1,46 +1,26 @@
-
 # CHTS-Advanced-Materials: System Configuration
-# This file defines sensor mappings, sampling rates, and hardware thresholds.
+# This file governs the operational thresholds for the 5-stage cascade.
 
-system:
-  name: "CHTS-Alpha-Unit"
-  version: "1.0.0"
-  environment: "production"
+system_metadata:
+  version: "1.0"
+  mode: "production"
+  log_level: "INFO"
 
-# Data acquisition settings
-acquisition:
-  sample_rate_hz: 10.0
-  buffer_size: 1024
-  timeout_ms: 500
-
-# Sensor pin mapping and calibration offsets
-sensors:
-  pressure_transducer:
-    pin: "A0"
-    calibration_offset: 0.05
-    unit: "Pa"
-  thermocouple_inlet:
-    pin: "T1"
-    calibration_offset: 0.0
-    unit: "Celsius"
-  thermocouple_outlet:
-    pin: "T2"
-    calibration_offset: 0.0
-    unit: "Celsius"
-  flow_meter:
-    pin: "D5"
-    unit: "kg/s"
-
-# Hardware Actuator configuration
-actuators:
-  intake_valve:
-    pin: "PWM1"
-    safe_state: "CLOSED"
-  bypass_valve:
-    pin: "PWM2"
-    safe_state: "OPEN"
-
-# Operational thresholds imported by the AI Observer
 thresholds:
-  max_pressure_drop: 500.0
-  safety_temp_limit: 85.0
+  # Fouling threshold: Triggers Self-Healing (1.0 = High resistance)
+  fouling_limit: 0.5
+  # Stage 5 entropy limit: Threshold for exit thermal equilibrium
+  stage_5_entropy: 30.0
+  # Pressure safety: Max allowable delta-P before E-Stop
+  max_pressure_delta: 5.0
+
+hardware_settings:
+  sampling_rate_hz: 10.0
+  bypass_valve_default: "closed"
+  intake_valve_default: 50
+
+# Simulation-in-the-Loop (SiL) Settings
+simulation:
+  enabled: false
+  time_step: 0.1
+  noise_factor: 0.02
