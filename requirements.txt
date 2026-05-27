@@ -1,26 +1,6 @@
-# Define the contents of requirements.txt
-requirements_content = """# CHTS-Advanced-Materials Dependencies
-
-# Core logic & data processing
 numpy>=1.21.0
 pandas>=1.3.0
 scipy>=1.7.0
-
-# Configuration & data serialization
 pyyaml>=6.0.0
-
-# Hardware communication (Assuming Raspberry Pi/General Linux environment)
-# Uncomment the following if interfacing with physical GPIO/I2C/SPI
-# adafruit-circuitpython-ads1x15
-# RPi.GPIO
-
-# Testing & Validation
 pytest>=7.0.0
-
-# Simulation-in-the-Loop (SiL)
 matplotlib>=3.4.0
-"""
-
-# Create the file
-with open('requirements.txt', 'w') as f:
-    f.write(requirements_content)
