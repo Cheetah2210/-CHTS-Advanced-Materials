@@ -21,8 +21,13 @@ To ensure the system reaches steady-state efficiency, perform the following:
 Once the 100-hour run is complete, update the following parameters in your `/src/observer/core.py` initialization:
 
 ```python
+
 # Example of setting your baseline after calibration
 baseline_pressure = 105.2 # Average from baseline.csv
 baseline_temp_delta = 28.5 # Average from baseline.csv
 
 detector = AnomalyDetector(baseline_pressure, baseline_temp_delta)
+
+---
+
+
