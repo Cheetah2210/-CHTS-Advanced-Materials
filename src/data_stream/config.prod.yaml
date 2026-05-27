@@ -1,0 +1,44 @@
+# CHTS-Advanced-Materials: Production Configuration
+# WARNING: Values here reflect physical hardware limits. 
+# Unauthorized modification may result in equipment failure.
+
+system:
+  name: "CHTS-Alpha-Production"
+  version: "1.0.0"
+  environment: "production"
+
+# Data acquisition settings (Hardware-optimized)
+acquisition:
+  sample_rate_hz: 10.0      # Standardized rate for optimal sensor stability
+  mode: "hardware"          # Flags the use of real GPIO/I2C/SPI interfaces
+  timeout_ms: 100           # Tighter timeout for real-time safety
+
+# Pin mappings for production controller
+sensors:
+  pressure_transducer:
+    pin: "GPIO_P1"
+    calibration_offset: 0.0
+    unit: "Pa"
+  thermocouple_inlet:
+    pin: "ADC_0"
+    calibration_offset: 0.0
+    unit: "Celsius"
+  thermocouple_outlet:
+    pin: "ADC_1"
+    calibration_offset: 0.0
+    unit: "Celsius"
+
+# Production Actuator mapping
+actuators:
+  intake_valve:
+    pin: "PWM_0"
+    safe_state: "CLOSED"
+  bypass_valve:
+    pin: "PWM_1"
+    safe_state: "OPEN"
+
+# Strict operational thresholds (Linked to reqs/requirements.md)
+thresholds:
+  max_pressure_drop: 500.0   # REQ-04: Threshold for Thermal Shock
+  safety_temp_limit: 85.0    # REQ-07: Hard limit for shutdown
+  min_nusselt_number: 15.0   # REQ-01: Efficiency lower bound
