@@ -1,4 +1,4 @@
-```python
+
 """
 CHTS-Advanced-Materials: Self-Healing Routines
 Automated remediation and safe-state recovery.
@@ -87,4 +87,4 @@ class SelfHealingManager:
             )
 
             raise
-```
+
