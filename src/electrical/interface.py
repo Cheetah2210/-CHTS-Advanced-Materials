@@ -1,23 +1,18 @@
-"""
-CHTS-Advanced-Materials: Electrical Interface Layer
-Maps physical sensor signals to normalized units.
-"""
+from src.hardware.controller import HardwareController
 
-from .drivers import PressureSensor, ValveActuator
-
-class HardwareController:
+class ElectricalInterface:
     def __init__(self, config):
-        self.pressure_sensor = PressureSensor(pin=config['sensors']['pressure_transducer']['pin'])
-        self.intake_valve = ValveActuator(pin=config['actuators']['intake_valve']['pin'])
+        self.controller = HardwareController(config)
 
-    def get_pressure(self) -> float:
-        """Returns normalized pressure in Pascals."""
-        return self.pressure_sensor.read_pascal()
+    def get_system_state(self):
+        return {
+            "pressure_in": self.controller.get_pressure("inlet"),
+            "pressure_out": self.controller.get_pressure("outlet"),
+            "temp_exit": self.controller.get_temp("exit")
+        }
 
-    def set_intake_valve(self, percentage: float):
-        """Sets valve position 0-100%."""
-        self.intake_valve.set_position(percentage)
+    def trigger_bypass(self):
+        self.controller.trigger_bypass()
 
-    def pulse_flow(self, duration: int, intensity: str):
-        """Hardware-specific pulsing routine for self-healing."""
-        self.intake_valve.execute_pulse(duration, intensity)
+    def set_intake(self, value):
+        self.controller.set_intake_valve(value)
