@@ -5,6 +5,7 @@ class ElectricalInterface:
         self.controller = HardwareController(config)
 
     def get_system_state(self):
+        """Aggregates all sensor data into a telemetry dictionary."""
         return {
             "pressure_in": self.controller.get_pressure("inlet"),
             "pressure_out": self.controller.get_pressure("outlet"),
@@ -14,5 +15,5 @@ class ElectricalInterface:
     def trigger_bypass(self):
         self.controller.trigger_bypass()
 
-    def set_intake(self, value):
+    def set_intake(self, value: int):
         self.controller.set_intake_valve(value)
