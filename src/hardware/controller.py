@@ -1,46 +1,61 @@
+```python
 """
 CHTS-Advanced-Materials: Hardware Controller
 Direct interaction layer for sensors and actuators.
 """
 
 import logging
+import random
 
 logger = logging.getLogger("CHTS-Hardware")
 
+
 class HardwareController:
     def __init__(self, config):
-        """Initializes hardware interfaces (GPIO, I2C, SPI, etc.) based on config."""
         self.config = config
-        logger.info("Hardware Controller initialized and ready.")
+        logger.info("Hardware Controller initialized.")
 
     def get_pressure(self, port: str) -> float:
         """
-        Reads pressure from the specified port.
-        Replace the return value with actual hardware I/O calls.
+        Mock pressure telemetry.
+        Replace with real sensor I/O.
         """
-        # Example: Mocking return value for system testing
         logger.debug(f"Reading pressure from {port}")
-        return 101.3 
+
+        base = 101.3
+
+        if port == "inlet":
+            return base + random.uniform(2.0, 6.0)
+
+        elif port == "outlet":
+            return base + random.uniform(-1.0, 2.0)
+
+        return base
 
     def get_temp(self, location: str) -> float:
         """
-        Reads temperature from the specified location.
-        Replace the return value with actual hardware I/O calls.
+        Mock thermal telemetry.
+        Replace with thermocouple/RTD reads.
         """
-        # Example: Mocking return value for system testing
         logger.debug(f"Reading temperature from {location}")
+
+        if location == "exit":
+            return random.uniform(20.0, 45.0)
+
         return 25.0
 
     def trigger_bypass(self):
-        """Activates the physical bypass valve solenoid."""
-        # Logic for GPIO pin toggle goes here
-        logger.info("Hardware: Physical bypass valve solenoid activated.")
+        logger.info(
+            "Hardware: Bypass valve activated."
+        )
 
     def set_intake_valve(self, value: int):
         """
-        Sets the intake valve position (0-100%).
-        Logic for PWM or Servo control goes here.
+        Sets intake valve position (0–100%).
         """
-        # Example: Input validation
-        clamped_value = max(0, min(100, value))
-        logger.info(f"Hardware: Intake valve set to {clamped_value}%.")
+        clamped = max(0, min(100, value))
+
+        logger.info(
+            f"Hardware: Intake valve set to {clamped}%."
+        )
+```
