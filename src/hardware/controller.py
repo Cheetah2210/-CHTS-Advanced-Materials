@@ -7,18 +7,18 @@ Acts as the interface between the AI Observer and physical actuators.
 class HardwareController:
     def __init__(self, config):
         self.config = config
-        self.initialize_pins()
+        # Initialize pins, buses, and drivers here
 
-    def initialize_pins(self):
-        # Logic to set up GPIO, PWM channels, etc.
-        print("Hardware initialized using configuration: " + self.config['system']['name'])
+    def get_pressure(self, port: str) -> float:
+        # Placeholder: logic to query sensors
+        return 101.3  # Returns simulated value
 
-    def set_intake_valve(self, position: float):
-        """Sets the intake valve position (0.0 to 1.0)."""
-        # Logic to drive the physical PWM signal
-        pass
+    def get_temp(self, location: str) -> float:
+        # Placeholder: logic to query sensors
+        return 25.0
 
     def trigger_bypass(self):
-        """Forces the scavenger into 'Safe State'."""
-        print("CRITICAL: Opening bypass valve.")
-        # Logic to flip physical relays/valves
+        print("Hardware: Bypass valve activated.")
+
+    def set_intake_valve(self, value: int):
+        print(f"Hardware: Intake valve set to {value}.")
