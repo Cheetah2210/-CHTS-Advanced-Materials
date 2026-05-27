@@ -1,7 +1,7 @@
 # CHTS-Advanced-Materials (Cascading Hybrid Thermal Scavenger)
+
 ![CHTS-Advanced-Materials Architecture Framework](images/CHTS-V2.png)
 
-![CHTS-Advanced-Materials Architecture Framework](docs/assets/CHTS_ARCH.png)
 
 **CHTS-Advanced-Materials** is a deterministic and reproducible framework for modeling serial enthalpy cascade thermal recovery. This repository provides a reproducible and internally validated environment for simulating thermal scavenge performance, verifying telemetry against thermodynamic constraints, and auditing recovery metrics using high-conductivity carbon-composite hardware.
 
