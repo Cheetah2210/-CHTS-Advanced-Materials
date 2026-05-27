@@ -1,26 +1,66 @@
+# ============================================================
 # CHTS-Advanced-Materials: System Configuration
-# This file governs the operational thresholds for the 5-stage cascade.
+# Governs operational thresholds and simulation behavior
+# for the 5-stage thermodynamic cascade.
+# ============================================================
 
 system_metadata:
   version: "1.0"
   mode: "production"
   log_level: "INFO"
 
+# ============================================================
+# Operational Thresholds
+# ============================================================
+
 thresholds:
-  # Fouling threshold: Triggers Self-Healing (1.0 = High resistance)
+
+  # Fouling threshold
+  # Triggers self-healing logic
+  # (higher = more flow resistance)
   fouling_limit: 0.5
-  # Stage 5 entropy limit: Threshold for exit thermal equilibrium
+
+  # Stage 5 thermal equilibrium threshold (°C)
   stage_5_entropy: 30.0
-  # Pressure safety: Max allowable delta-P before E-Stop
+
+  # Emergency pressure safety limit
+  # Maximum allowable delta-P
   max_pressure_delta: 5.0
 
+
+# ============================================================
+# Hardware / Control Layer
+# ============================================================
+
 hardware_settings:
+
+  # Observer polling frequency
   sampling_rate_hz: 10.0
+
+  # Startup actuator states
   bypass_valve_default: "closed"
   intake_valve_default: 50
 
-# Simulation-in-the-Loop (SiL) Settings
+
+# ============================================================
+# Simulation-in-the-Loop (SiL)
+# ============================================================
+
 simulation:
+
+  # Enables synthetic telemetry
   enabled: false
+
+  # Simulation timestep (seconds)
   time_step: 0.1
+
+  # Sensor noise scaling
   noise_factor: 0.02
+
+  # Deterministic replay mode
+  # true = repeatable simulations
+  # false = true-random behavior
+  deterministic_seed: true
+
+  # RNG seed for reproducibility
+  seed_value: 42
