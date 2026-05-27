@@ -1,56 +1,82 @@
+```python
 """
 CHTS-Advanced-Materials: Execution Entry Point
-This script initializes the environment and enters the observation loop.
+Initializes configuration and enters the thermodynamic observer loop.
 """
 
 import yaml
 import logging
 import sys
 import os
+import time
 from src.observer.core import AIObserver
 
-# Setup structured logging
+# Structured logging
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 )
+
 logger = logging.getLogger("CHTS-Main")
 
-def main():
-    # 1. Load Configuration
-    config_path = "src/data_stream/config.yaml"
-    
+
+def load_config():
+    """Load YAML configuration relative to this file."""
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    config_path = os.path.abspath(
+        os.path.join(base_dir, "..", "data_stream", "config.yaml")
+    )
+
     if not os.path.exists(config_path):
-        logger.error(f"Configuration file not found at {config_path}")
+        logger.error(f"Configuration file not found: {config_path}")
         sys.exit(1)
-        
-    with open(config_path, "r") as f:
-        try:
+
+    try:
+        with open(config_path, "r") as f:
             config = yaml.safe_load(f)
             logger.info("Configuration loaded successfully.")
-        except yaml.YAMLError as e:
-            logger.error(f"Error parsing YAML configuration: {e}")
-            sys.exit(1)
-    
-    # 2. Initialize the AI Observer
+            return config
+    except yaml.YAMLError as e:
+        logger.error(f"YAML parsing error: {e}")
+        sys.exit(1)
+
+
+def main():
+    # Load configuration
+    config = load_config()
+
+    # Initialize observer
     try:
         observer = AIObserver(config)
-        logger.info("CHTS-Advanced-Materials Observer System initialized.")
+        logger.info("CHTS Observer initialized.")
     except Exception as e:
-        logger.error(f"Failed to initialize AIObserver: {e}")
+        logger.error(f"Observer initialization failed: {e}")
         sys.exit(1)
-    
-    # 3. Execution Loop
-    logger.info("Starting thermodynamic observation loop. Press Ctrl+C to terminate.")
+
+    # Sampling frequency
+    sampling_rate = (
+        config.get("hardware_settings", {})
+        .get("sampling_rate_hz", 1.0)
+    )
+
+    sample_delay = 1.0 / max(sampling_rate, 0.1)
+
+    logger.info(
+        f"Starting observation loop at {sampling_rate:.2f} Hz."
+    )
+
     try:
         while True:
             observer.run_cycle()
-            # Optional: Add sleep if sampling frequency needs regulation
-            # time.sleep(1.0 / config['hardware_settings']['sampling_rate_hz'])
+            time.sleep(sample_delay)
+
     except KeyboardInterrupt:
-        logger.info("System shutdown signal received. Executing safe-state protocol.")
-        # Optional: Add explicit call to close hardware valves here
+        logger.info(
+            "Shutdown signal received. Entering safe-state."
+        )
         sys.exit(0)
+
 
 if __name__ == "__main__":
     main()
+```
