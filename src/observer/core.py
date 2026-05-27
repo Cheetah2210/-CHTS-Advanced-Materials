@@ -1,4 +1,4 @@
-```python
+
 """
 CHTS-Advanced-Materials: AI Observer Core
 Central intelligence loop for monitoring,
@@ -151,4 +151,4 @@ class AIObserver:
             )
 
             # Future cascade control logic
-```
+
