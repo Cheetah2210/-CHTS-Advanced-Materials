@@ -1,4 +1,4 @@
-```python
+
 """
 CHTS-Advanced-Materials: Hardware Controller
 Direct interaction layer for sensors and actuators.
@@ -58,4 +58,4 @@ class HardwareController:
         logger.info(
             f"Hardware: Intake valve set to {clamped}%."
         )
-```
+
