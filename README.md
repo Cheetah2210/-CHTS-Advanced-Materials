@@ -1,4 +1,5 @@
 # CHTS-Advanced-Materials (Cascading Hybrid Thermal Scavenger)
+![CHTS-Advanced-Materials Architecture Framework](images/CHTS-V2.png)
 
 ![CHTS-Advanced-Materials Architecture Framework](docs/assets/CHTS_ARCH.png)
 
