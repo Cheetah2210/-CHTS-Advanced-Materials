@@ -49,4 +49,4 @@ class AIObserver:
         
         if exit_temp > stage_5_limit:
             logger.info("Stage 5: Entropy harvesting threshold exceeded. Adjusting flow.")
-            # Interface logic for Stage 5 would go here
+            # Interface logic for Stage 5 adjustments go here
