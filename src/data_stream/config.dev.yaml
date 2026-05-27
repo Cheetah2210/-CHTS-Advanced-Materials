@@ -1,0 +1,37 @@
+# CHTS-Advanced-Materials: Development Configuration
+# Used for Simulation-in-the-Loop (SiL) and unit testing.
+
+system:
+  name: "CHTS-Development-Sim"
+  version: "1.0.0"
+  environment: "development"
+
+# Simulation overrides
+acquisition:
+  sample_rate_hz: 50.0       # Higher rate for rapid simulation cycles
+  mode: "simulation"        # Flag to trigger simulated sensor data
+
+# Mock sensor values for simulation
+sensors:
+  pressure_transducer:
+    pin: "MOCK_A0"
+    calibration_offset: 0.0
+    unit: "Pa"
+  thermocouple_inlet:
+    pin: "MOCK_T1"
+    calibration_offset: 0.0
+    unit: "Celsius"
+
+# Actuators configured for non-destructive testing
+actuators:
+  intake_valve:
+    pin: "MOCK_PWM1"
+    safe_state: "CLOSED"
+  bypass_valve:
+    pin: "MOCK_PWM2"
+    safe_state: "OPEN"
+
+# Looser thresholds for testing transient states
+thresholds:
+  max_pressure_drop: 1000.0   # Doubled for testing simulation drift
+  safety_temp_limit: 120.0    # Higher limit to prevent unwanted shutdowns during bench tests
