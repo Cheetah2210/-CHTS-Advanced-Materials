@@ -1,4 +1,4 @@
-```python
+
 """
 CHTS-Advanced-Materials: Execution Entry Point
 Initializes configuration and enters the thermodynamic observer loop.
@@ -105,4 +105,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-```
+
