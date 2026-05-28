@@ -1,4 +1,4 @@
-```python
+
 """
 CHTS-Advanced-Materials: AI Observer Core
 
@@ -323,4 +323,4 @@ class AIObserver:
             # Flow adjustment
             # Stage tuning
             # Exergy analysis
-```
+
